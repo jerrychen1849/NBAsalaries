@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <h1>NBA Salary Data</h1>
+    <style>
+      h1 {
+        text-align: center
+      }
+      .team_form {
+        text-align: center;
+        gap: 20px;
+      }
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="team_form" action="{{ url_for('select_team_data') }}" method="POST">
+      <label for="team">Choose a team:</label>
+      <select name="team" id="team">
+          {% for team in teams %}
+          <option value="{{ team }}">{{ team }}</option>
+          {% endfor %}
+      </select>
+      <br><br>
+      <p>Select which data you would like to visualize:</p>
+      <table class="center" border=0>
+        {% for key, value in options.items() %}
+        <tr>
+            <td style="text-align:left"><input type="radio" name="data_type" id={{key}} value={{key}} checked>
+                {{value}} </input></td>
+        </tr>
+        {% endfor %}
+      </table>
+        <br><br>
+      <input type="submit" value="Plot!">
+    </form>
+
+  </body>
+  </html>
